@@ -97,20 +97,15 @@ class ShopTransactionPage extends ShopPage {
                 } catch (e) {}
               }
               // Add enchantments.
-              const enchantmentTrait = new ItemStackEnchantableTrait(item);
-              if (enchantmentTrait && this.item.enchantments) {
+              const enchantable = item.addTrait(ItemStackEnchantableTrait);
+              if (enchantable && this.item.enchantments) {
                 for (let enchantment of this.item.enchantments) {
-                  const enchantId = Object.keys(Enchantment).indexOf(
-                    enchantment.id
-                  );
+                  const enchantId =
+                    Enchantment[enchantment.id as keyof typeof Enchantment];
                   if (enchantId)
-                    enchantmentTrait.addEnchantment(
-                      enchantId,
-                      enchantment.level
-                    );
+                    enchantable.addEnchantment(enchantId, enchantment.level);
                 }
               }
-              item.addTrait(enchantmentTrait);
             }
             // Give item.
             inventory.giveItem(item, amount);

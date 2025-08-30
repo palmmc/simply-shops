@@ -8,7 +8,7 @@ class ShopPage {
     this.shop = shop;
   }
 
-  public show(player: Player) {
+  public show(_player: Player) {
     // Implemented by page.
   }
 }
